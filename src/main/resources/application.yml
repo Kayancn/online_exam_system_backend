@@ -7,7 +7,15 @@ spring:
     url: jdbc:mysql://8.130.96.113:3306/exam_system?serverTimezone=GMT%2b8
     username: Kayan
     password: 013890Yk!
-    hikari.maxLifeTime : 600000 #10分钟等待时间
+    hikari:
+      connection-timeout: 10000
+      validation-timeout: 3000
+      idle-timeout: 60000
+      login-timeout: 5
+      max-lifetime: 60000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      read-only: false
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml  #扫描所有mybatis的xml文件
