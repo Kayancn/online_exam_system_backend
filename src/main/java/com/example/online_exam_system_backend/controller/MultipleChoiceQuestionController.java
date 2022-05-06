@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.online_exam_system_backend.service.IMultipleChoiceQuestionService;
 import com.example.online_exam_system_backend.entity.MultipleChoiceQuestion;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -18,10 +18,10 @@ import org.springframework.stereotype.Controller;
  * </p>
  *
  * @author Kayan
- * @since 2022-05-03
+ * @since 2022-05-05
  */
-@Controller
-@RequestMapping("/multipleChoiceQuestion")
+@RestController
+@RequestMapping("/multiple-choice-question")
 public class MultipleChoiceQuestionController {
 
     @Resource

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author Kayan
- * @since 2022-05-03
+ * @since 2022-05-05
  */
 @Service
 public class MultipleChoiceQuestionServiceImpl extends ServiceImpl<MultipleChoiceQuestionMapper, MultipleChoiceQuestion> implements IMultipleChoiceQuestionService {

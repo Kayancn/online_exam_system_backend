@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author Kayan
- * @since 2022-05-03
+ * @since 2022-05-05
  */
 public interface MultipleChoiceQuestionMapper extends BaseMapper<MultipleChoiceQuestion> {
 
