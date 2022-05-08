@@ -14,5 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ITeacherService extends IService<Teacher> {
 
-    boolean login(LoggerDTO loggerDTO);
+    LoggerDTO login(LoggerDTO loggerDTO);
 }

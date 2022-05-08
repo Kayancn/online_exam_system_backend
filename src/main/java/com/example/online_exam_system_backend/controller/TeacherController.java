@@ -3,6 +3,8 @@ package com.example.online_exam_system_backend.controller;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.online_exam_system_backend.common.Constants;
+import com.example.online_exam_system_backend.common.Result;
 import com.example.online_exam_system_backend.controller.dto.LoggerDTO;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
@@ -31,13 +33,14 @@ public class TeacherController {
 
     // 登陆
     @PostMapping("/login")
-    public boolean save(@RequestBody LoggerDTO loggerDTO) {
+    public Result save(@RequestBody LoggerDTO loggerDTO) {
         String id = loggerDTO.getId();
         String password = loggerDTO.getPassword();
         if (StrUtil.isBlank(id) || StrUtil.isBlank(password)) {
-            return false;
+            return Result.error(Constants.CODE_400,"参数错误");
         }
-        return teacherService.login(loggerDTO);
+        LoggerDTO dto = teacherService.login(loggerDTO);
+        return Result.success(dto);
     }
 
 }

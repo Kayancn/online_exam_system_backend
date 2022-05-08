@@ -7,4 +7,5 @@ import lombok.Data;
 public class LoggerDTO {
     private String id;
     private String password;
+    private String name;
 }
