@@ -58,7 +58,7 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public Student findOne(@PathVariable Integer id) {
+    public Student findOne(@PathVariable String id) {
         return studentService.getById(id);
     }
 

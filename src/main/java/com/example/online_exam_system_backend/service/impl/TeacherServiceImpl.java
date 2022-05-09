@@ -10,6 +10,7 @@ import com.example.online_exam_system_backend.exception.ServiceException;
 import com.example.online_exam_system_backend.mapper.TeacherMapper;
 import com.example.online_exam_system_backend.service.ITeacherService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.online_exam_system_backend.utils.TokenUtils;
 import org.springframework.stereotype.Service;
 
 /**
@@ -38,6 +39,9 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         }
         if(one != null){
             BeanUtil.copyProperties(one, loggerDTO, true);
+            // 设置token
+            String token = TokenUtils.genToken(one.getId(), one.getPassword());
+            loggerDTO.setToken(token);
             return loggerDTO;
         } else {
             throw new ServiceException(Constants.CODE_600,"账号或密码错误");
