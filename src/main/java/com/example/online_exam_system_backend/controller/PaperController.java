@@ -1,10 +1,12 @@
 package com.example.online_exam_system_backend.controller;
 
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.online_exam_system_backend.common.Result;
+import com.example.online_exam_system_backend.controller.dto.HandPaperDTO;
 import com.example.online_exam_system_backend.controller.dto.PaperDTO;
 import com.example.online_exam_system_backend.entity.PaperQuestion;
 import com.example.online_exam_system_backend.entity.Question;
@@ -50,7 +52,29 @@ public class PaperController {
     public boolean save(@RequestBody Paper paper) {
         return paperService.saveOrUpdate(paper);
     }
+    //手动组卷
+    @PostMapping("/handPaper")
+    public Result handPaper(@RequestBody HandPaperDTO handPaperDTO){
+        //删除老试卷
+        UpdateWrapper<PaperQuestion> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("paper_id", handPaperDTO.getPaperId());
+        paperQuestionService.remove(updateWrapper);
 
+        //生成新试卷
+        if (CollUtil.isEmpty(handPaperDTO.getHandleQuestionIds())){
+            throw new ServiceException("-1","未选择任何题目");
+        }
+        List<Integer> selectedQuestionIds = handPaperDTO.getHandleQuestionIds();
+        List<PaperQuestion> list = new ArrayList<>();
+        for(Integer id : selectedQuestionIds){
+            PaperQuestion pq = new PaperQuestion();
+            pq.setPaperId(handPaperDTO.getPaperId());
+            pq.setQuestionId(id);
+            list.add(pq);
+        }
+        paperQuestionService.saveBatch(list);
+        return Result.success();
+    }
     //自动组卷
     @PostMapping("/takePaper")
     public Result takePaper(@RequestBody PaperDTO paperDTO) {
