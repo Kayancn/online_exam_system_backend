@@ -56,10 +56,18 @@ public class QuestionController {
     @GetMapping("/page")
     public Page<Question> findPage(@RequestParam Integer pageNum,
                                    @RequestParam Integer pageSize,
-                                   @RequestParam(defaultValue = "") String name) {
+                                   @RequestParam(defaultValue = "") String name,
+                                   @RequestParam(required = false) Integer courseId,
+                                   @RequestParam(required = false) Integer type) {
         QueryWrapper<Question> queryWrapper = new QueryWrapper<>();
         if(!"".equals(name)){
             queryWrapper.like("name", name);
+        }
+        if(courseId != null){
+            queryWrapper.eq("course_id", courseId);
+        }
+        if(type != null){
+            queryWrapper.eq("type", type);
         }
         queryWrapper.orderByDesc("id");
         return questionService.page(new Page<>(pageNum, pageSize), queryWrapper);
