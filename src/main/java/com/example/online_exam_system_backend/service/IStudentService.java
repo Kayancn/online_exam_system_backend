@@ -1,5 +1,6 @@
 package com.example.online_exam_system_backend.service;
 
+import com.example.online_exam_system_backend.controller.dto.LoggerDTO;
 import com.example.online_exam_system_backend.entity.Student;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IStudentService extends IService<Student> {
 
+    LoggerDTO login(LoggerDTO loggerDTO);
 }

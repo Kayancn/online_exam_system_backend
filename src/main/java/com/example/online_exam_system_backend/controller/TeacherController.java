@@ -34,7 +34,7 @@ public class TeacherController {
 
     // 登陆
     @PostMapping("/login")
-    public Result save(@RequestBody LoggerDTO loggerDTO) {
+    public Result login(@RequestBody LoggerDTO loggerDTO) {
         String id = loggerDTO.getId();
         String password = loggerDTO.getPassword();
         if (StrUtil.isBlank(id) || StrUtil.isBlank(password)) {

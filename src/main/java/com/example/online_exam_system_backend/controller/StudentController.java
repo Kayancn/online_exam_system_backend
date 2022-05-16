@@ -2,10 +2,14 @@ package com.example.online_exam_system_backend.controller;
 
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.online_exam_system_backend.common.Constants;
+import com.example.online_exam_system_backend.common.Result;
+import com.example.online_exam_system_backend.controller.dto.LoggerDTO;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
@@ -35,7 +39,16 @@ public class StudentController {
 
     @Resource
     private IStudentService studentService;
-
+    @PostMapping("/login")
+    public Result login(@RequestBody LoggerDTO loggerDTO) {
+        String id = loggerDTO.getId();
+        String password = loggerDTO.getPassword();
+        if (StrUtil.isBlank(id) || StrUtil.isBlank(password)) {
+            return Result.error(Constants.CODE_400,"参数错误");
+        }
+        LoggerDTO dto = studentService.login(loggerDTO);
+        return Result.success(dto);
+    }
     // 新增或者更新
     @PostMapping
     public boolean save(@RequestBody Student student) {
