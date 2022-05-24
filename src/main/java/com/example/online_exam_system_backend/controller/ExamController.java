@@ -1,7 +1,11 @@
 package com.example.online_exam_system_backend.controller;
 
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.online_exam_system_backend.common.Constants;
+import com.example.online_exam_system_backend.common.Result;
+import com.example.online_exam_system_backend.controller.dto.ExamDTO;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
@@ -26,6 +30,16 @@ public class ExamController {
 
     @Resource
     private IExamService examService;
+    @PostMapping("/begin")
+    public Result begin(@RequestBody ExamDTO examDTO) {
+        Integer id = examDTO.getId();
+        String password = examDTO.getPassword();
+        if (id == null || StrUtil.isBlank(password)) {
+            return Result.error(Constants.CODE_400,"参数错误");
+        }
+        ExamDTO dto = examService.begin(examDTO);
+        return Result.success(dto);
+    }
 
     // 新增或者更新
     @PostMapping

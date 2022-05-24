@@ -1,5 +1,6 @@
 package com.example.online_exam_system_backend.service;
 
+import com.example.online_exam_system_backend.controller.dto.ExamDTO;
 import com.example.online_exam_system_backend.entity.Exam;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IExamService extends IService<Exam> {
 
+    ExamDTO begin(ExamDTO examDTO);
 }

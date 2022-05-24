@@ -36,11 +36,16 @@ public class Exam implements Serializable {
       @ApiModelProperty("负责老师")
       private String teacherId;
 
-      @ApiModelProperty("考试状态")
-      private String state;
-
       @ApiModelProperty("试卷id")
       private Integer paperId;
 
+      @ApiModelProperty("课程id")
+      private Integer courseId;
+
+      @ApiModelProperty("考试密码")
+      private String password;
+
+      @ApiModelProperty("考试时长")
+      private Integer duration;
 
 }
